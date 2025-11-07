@@ -3,6 +3,26 @@
   ros__parameters:
     tf_timeout_threshold: 0.05
 
+    # Set Mavros Plugin Allowlist to explicitly list
+    # Which plugins to run! 
+    plugin_allowlist:
+      - altitude
+      - command
+      - global_position
+      - imu
+      - local_position
+      - manual_control
+      - param
+      - rc_io
+      - setpoint_attitude
+      - setpoint_position
+      - setpoint_raw
+      - setpoint_velocity
+      - sys_status
+      - sys_time
+      - vision_pose_estimate
+
+
 /**:
   # Basic Robotics Functions
   # Platform
@@ -17,16 +37,16 @@
   state_estimator:
     ros__parameters:
       # Indoor Raw Odometry
-      # plugin_name: "raw_odometry"
+      plugin_name: "raw_odometry"
       # # Indoor RealSense
       # plugin_name: "raw_odometry"
       # odom_topic: "sensor_measurements/realsense/odom"
       # # Indoor Motion Capture
-      plugin_name: "mocap_pose"
-      mocap_topic: "/optitrack/rigid_bodies"
-      rigid_body_name: "qav1"
-      twist_smooth_filter_cte: 0.1
-      orientation_smooth_filter_cte: 0.1
+      # plugin_name: "mocap_pose"
+      # mocap_topic: "/optitrack/rigid_bodies"
+      # rigid_body_name: "qav1"
+      # twist_smooth_filter_cte: 0.1
+      # orientation_smooth_filter_cte: 0.1
       # # Outdoor (GPS) Raw Odometry
       #plugin_name: "raw_odometry"
       #use_gps: true
@@ -67,11 +87,16 @@
         yaw: -1.57079632679 # Rotation around z (rad)
 
 # Specific Parameters for each drone
-# drone0:
-#   # Motion Capture
-#   state_estimator:
-#     ros__parameters:
-#       rigid_body_name: "1"
+qav2:
+  mavros/mavros_node:
+    ros__parameters:
+      fcu_url: "serial:///dev/ttyPixhawk" # Autopilot address for connection
+      tgt_system: 1 # Target system ID
+  
+  # Motion Capture
+  state_estimator:
+    ros__parameters:
+      rigid_body_name: "qav2"
 
 # Specific Parameters for each drone
 drone0:

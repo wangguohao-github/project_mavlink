@@ -1,0 +1,10 @@
+[submodule "external/as2_platform_mavlink"]
+	path = external/as2_platform_mavlink
+	url = https://github.com/mhl787156/as2_platform_mavlink.git
+# [submodule "external/topic_tools"]
+# 	path = external/topic_tools
+# 	url = https://github.com/ros-tooling/topic_tools.git
+# 	branch = humble
+# [submodule "external/mocap4ros2_optitrack"]
+# 	path = external/mocap4ros2_optitrack
+# 	url = https://github.com/ucl-delta/mocap4ros2_optitrack.git

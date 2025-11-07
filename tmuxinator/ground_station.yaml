@@ -10,6 +10,7 @@ mocap4ros2        = @settings["mocap4ros2"] == "true"
 name: ground_station
 attach: false
 root: ./
+pre_window: source setup.bash; tmux set mouse on
 windows:
   # Zenoh
   # - zenoh:
@@ -46,7 +47,8 @@ windows:
       <%- end %>
       <%- if mocap4ros2 %>
         - ros2 launch mocap4r2_optitrack_driver optitrack2.launch.py
-            namespace:=mocap
-            config_file:=ground_station/mocap4r2_optitrack.yaml
+            namespace:=optitrack
+            config_file:=config_ground_station/mocap4r2_optitrack.yaml
         - sleep 1; ros2 lifecycle set /mocap/mocap4r2_optitrack_driver_node activate
+        - ros2 run topic_tools relay /optitrack/rigid_bodies/<%= drone_namespace %> /<%= drone_namespace %>/mavros/vision_pose/pose
       <%- end %>
