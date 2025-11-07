@@ -87,16 +87,16 @@
         yaw: -1.57079632679 # Rotation around z (rad)
 
 # Specific Parameters for each drone
-qav2:
+qav1:
   mavros/mavros_node:
     ros__parameters:
-      fcu_url: "serial:///dev/ttyPixhawk" # Autopilot address for connection
+      fcu_url: "serial:///dev/ttyAMA0" # Autopilot address for connection
       tgt_system: 1 # Target system ID
   
   # Motion Capture
   state_estimator:
     ros__parameters:
-      rigid_body_name: "qav2"
+      rigid_body_name: "qav1"
 
 # Specific Parameters for each drone
 drone0:
