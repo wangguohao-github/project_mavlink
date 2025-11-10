@@ -66,11 +66,29 @@ RUN wget https://raw.githubusercontent.com/mavlink/mavros/ros2/mavros/scripts/in
     rm install_geographiclib_datasets.sh
 
 # --------------------------------------------------------------------
-# 4. Clone and build as2_platform_mavlink + your project
+# 4. Clone and build mavlink router for routing offboard
 # --------------------------------------------------------------------
-# --------------------------------------------------------------------
-# 4. Copy local as2_platform_mavlink and project_mavlink
-# --------------------------------------------------------------------
+
+RUN apt-get update     \
+    && apt-get install -y 	\
+        ninja-build\
+        gcc\
+        g++\
+        git\
+        ca-certificates\
+        python3-pip\
+        # python3-numpy\
+        # python3-pandas\
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*     \
+        && update-ca-certificates     \
+    && pip3 install meson==1.1.0 # buildkit
+
+RUN git clone --recursive https://github.com/mavlink-router/mavlink-router.git \
+    && cd mavlink-router \
+    && meson setup -Dsystemdsystemunitdir=/usr/lib/systemd/system --buildtype=release build .   \
+    && ninja -C build install 
+
 # --------------------------------------------------------------------
 # 4. Copy local as2_platform_mavlink and your project
 # --------------------------------------------------------------------
@@ -99,6 +117,11 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc && \
 # --------------------------------------------------------------------
 # 7. Default entrypoint (interactive mode)
 # --------------------------------------------------------------------
+
+# Copy over mavlink-router configuration
+COPY config/mavlink-router.conf /etc/mavlink-router/main.conf
+
+# Setup main command
 WORKDIR /root/aerostack2_ws/src/project_mavlink
 CMD ["/bin/bash", "-ic", "./launch_as2.bash -n qav1"]
 

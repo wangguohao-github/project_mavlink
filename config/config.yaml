@@ -90,7 +90,7 @@
 qav2:
   mavros/mavros_node:
     ros__parameters:
-      fcu_url: "serial:///dev/ttyPixhawk" # Autopilot address for connection
+      fcu_url: "udp://:14550@:127.0.0.1:14550" # Autopilot address for connection
       tgt_system: 1 # Target system ID
   
   # Motion Capture
@@ -98,24 +98,3 @@ qav2:
     ros__parameters:
       rigid_body_name: "qav2"
 
-# Specific Parameters for each drone
-drone0:
-  # Platform
-  mavros/mavros_node:
-    ros__parameters:
-      fcu_url: "serial:///dev/ttyUSB0:921600" # Autopilot address for connection
-      tgt_system: 1 # Target system ID = Instance + 1
-
-drone1:
-  # Platform
-  mavros/mavros_node:
-    ros__parameters:
-      fcu_url: "udp://:14541@127.0.0.1:14558" # Autopilot address for connection
-      tgt_system: 2 # Target system ID = Instance + 1
-
-drone2:
-  # Platform
-  mavros/mavros_node:
-    ros__parameters:
-      fcu_url: "udp://:14542@127.0.0.1:14559" # Autopilot address for connection
-      tgt_system: 3 # Target system ID = Instance + 1
