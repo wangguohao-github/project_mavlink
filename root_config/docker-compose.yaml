@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  mavlink:
+    image: 192.168.50.44:5000/project_mavlink:latest
+    container_name: project_mavlink
+    network_mode: host           #   ^i     ^n --net=host
+    privileged: true             #   ^i     ^n --privileged
+    volumes:
+      - /dev:/dev
+      - ./mavlink-router.conf:/etc/mavlink-router/main.conf
+    restart: always              #   ^i     ^n --restart=always
+    stdin_open: true             #   ^i     ^n -it
+    tty: true                    #   ^} ^l^a     ^r  ^o  ^h   
+    pid: host
+    ipc: host
+
