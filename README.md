@@ -24,7 +24,7 @@ sudo udevadm control --reload-rules
 
 This will connect up all pixhawks as either ttyPixhawk or ttyFTDI
 
-Ensure that the `config/mavlink-router.conf` is setup to reflect this. 
+Ensure that the `root_config/mavlink-router.conf` is setup to reflect this. 
 
 ### Docker Container Build
 
@@ -35,3 +35,7 @@ Ensure that the `config/mavlink-router.conf` is setup to reflect this.
 
 
 ## Running 
+docker-compose.yaml file is in root_config folder. Put it into the root directory of raspberry pi and run 
+```bash
+sudo docker compose up -d
+```
