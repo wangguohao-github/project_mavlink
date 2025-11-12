@@ -119,9 +119,9 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc && \
 # --------------------------------------------------------------------
 
 # Copy over mavlink-router configuration
-COPY config/mavlink-router.conf /etc/mavlink-router/main.conf
+COPY root_config/mavlink-router.conf /etc/mavlink-router/main.conf
 
 # Setup main command
 WORKDIR /root/aerostack2_ws/src/project_mavlink
-CMD ["/bin/bash", "-ic", "./launch_as2.bash -n qav1"]
+CMD ["/bin/bash", "-ic", "./launch_as2.bash"]
 

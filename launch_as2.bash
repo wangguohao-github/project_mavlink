@@ -9,7 +9,7 @@ usage() {
 }
 
 # Initialize variables with default values
-drones_namespace="drone0"
+drones_namespace=$(hostname) 
 motion_controller_plugin="pid"
 rosbag="false"
 use_gnome="false"
