@@ -14,7 +14,7 @@ usage() {
 drones_namespace_comma="drone0"
 keyboard_teleop="false"
 rviz="false"
-mocap4ros2="false"
+mocap4ros2="true"
 rosbag="false"
 use_gnome="false"
 

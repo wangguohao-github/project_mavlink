@@ -42,12 +42,23 @@ import rclpy
 
 TAKE_OFF_HEIGHT = 1.0  # Height in meters
 TAKE_OFF_SPEED = 0.3  # Max speed in m/s
-SLEEP_TIME = 5  # Sleep time between behaviors in seconds
+SLEEP_TIME = 3  # Sleep time between behaviors in seconds
 SPEED = 0.3  # Max speed in m/s
 HEIGHT = 1.0  # Height in meters
 DIM = 2.0
+YAW_LIST = [
+    0.5,            # 第一个点的 yaw
+    1.0,            # 第二个点的 yaw
+    1.5,           # 第三个点的 yaw
+    2.0            # 第四个点的 yaw
+]
 PATH = [
-    [0, 0, 1.0]
+    # [0, 0, 1.0],
+    # [0.2, -0.4, 1.0],
+    [0.5, 0, 1.0],
+    [0.5, -0.5, 1.0],
+    [0, -0.5, 1.0],
+    [0, 0, 1.0],
 ]
 LAND_SPEED = 0.3  # Max speed in m/s
 
@@ -86,22 +97,25 @@ def drone_start(drone_interface: DroneInterface) -> bool:
 
 def drone_run(drone_interface: DroneInterface) -> bool:
     """
-    Run the mission for a single drone.
-
-    :param drone_interface: DroneInterface object
-    :return: Bool indicating if the mission was successful
+    Run the mission for a single drone, with different yaw for each point.
     """
     print('Run mission')
 
-    # Go to path with keep yaw
-    for goal in PATH:
-        print(f'Go to with keep yaw {goal}')
-        success = drone_interface.go_to.go_to_point(goal, speed=SPEED)
+    for goal, yaw in zip(PATH, YAW_LIST):
+        print(f'Go to {goal} with yaw(rad)={yaw}')
+        success = drone_interface.go_to.go_to_point_with_yaw(
+            goal,
+            speed=SPEED,
+            angle=yaw   # 每个点不同的 yaw
+        )
         print(f'Go to success: {success}')
         if not success:
             return success
         print('Go to done')
         sleep(SLEEP_TIME)
+
+    return True
+
 
     # Go to path facing
     # for goal in PATH:
@@ -170,8 +184,8 @@ if __name__ == '__main__':
         verbose=verbosity)
 
     success = drone_start(uav)
-    # if success:
-    #     success = drone_run(uav)
+    if success:
+        success = drone_run(uav)
     success = drone_end(uav)
 
     uav.shutdown()
