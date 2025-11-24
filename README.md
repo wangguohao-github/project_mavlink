@@ -80,13 +80,5 @@ The password is:
 robodome
 ```
 
-##Trouble shooting
-###Unable to connect to drone controller
-stay close to the drone atena, unplug drone battery and plug again.
-###The qgroundcontrol can't receive message.
-Create a new udpendpoint to the mavlink router on the server, the config file is located at:
-```bash
-/etc/mavlink-router/main.conf
-```
 
 
