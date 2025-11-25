@@ -60,6 +60,13 @@ Create a new udpendpoint to the mavlink router on the server, the config file is
 ```bash
 /etc/mavlink-router/main.conf
 ```
+For example: 
+```bash
+[UdpEndpoint laptop1]
+Mode = Normal
+Address = 192.168.50.135
+Port = 14550
+```
 
 Restart the mavlink-router by running:
 ```bash
