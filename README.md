@@ -73,7 +73,7 @@ Restart the mavlink-router by running:
 sudo systemctl restart mavlink-router
 ```
 
-Then on your laptop, 
+Then on your laptop, start the qgroundcontrol
 ```bash
 ./QGroundControl-x86_64.AppImage
 ```
