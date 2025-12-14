@@ -37,9 +37,9 @@
   state_estimator:
     ros__parameters:
       # Indoor Raw Odometry
-      plugin_name: "raw_odometry"
+      #plugin_name: "raw_odometry"
       # # Indoor RealSense
-      # plugin_name: "raw_odometry"
+      plugin_name: "raw_odometry"
       # odom_topic: "sensor_measurements/realsense/odom"
       # # Indoor Motion Capture
       # plugin_name: "mocap_pose"
@@ -90,7 +90,7 @@
 qav1:
   mavros/mavros_node:
     ros__parameters:
-      fcu_url: "udp://:14550@:127.0.0.1:14550" # Autopilot address for connection
+      fcu_url: "udp://:14540@:127.0.0.1:14557" # Autopilot address for connection
       tgt_system: 1 # Target system ID
   
   # Motion Capture

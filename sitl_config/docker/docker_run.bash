@@ -82,7 +82,7 @@ XAUTH=/tmp/.docker.xauth
 # Build the Docker image if it does not exist
 if ! docker image inspect "${IMAGE_NAME}" &> /dev/null; then
     echo "Image not found. Building the Docker image..."
-    if [ -f docker/docker_build.bash ]; then
+    if [ -f sitl_config/docker/docker_build.bash ]; then
         source sitl_config/docker/docker_build.bash
     else
         echo "Error: docker/docker_build.bash not found."
